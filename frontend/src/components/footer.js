@@ -10,7 +10,7 @@ export default function Footer(){
                         <div class="d-flex flex-row justify-content-center mt-3">
                         <div>
                         <p class="footer-section-top-text mt-4">HHO <br />Helping Hands Organisation <br/>RGUKT RK Valley</p>
-                        <p class="footer-section-top-text mt-4">Help For The Needy</p>
+                        <p class="footer-section-bottom-text mt-4">Help For The Needy</p>
                         <div class="d-flex flex-row justify-content-center mt-3">
                             <div class="social-media-logo-container">
                                 <i class="fa-brands fa-google social-media-logo"></i>
@@ -30,7 +30,7 @@ export default function Footer(){
                     </div>
                 </div>
                 <div class="col-12 col-md-3 d-none d-lg-block">
-                    <div class="d-flex flex-column justify-content-end mt-2">
+                    <div class="d-flex flex-column justify-content-end mt-5">
                         <div class="m-auto mt-5">
                             <h1 class="footer-section-head">Contact Us</h1>
                             <p class="footer-section-bottom-text"><i class="fa-solid fa-envelope footer-contact-logo mr-3"></i>hho@rguktrkv.ac.in</p>
@@ -40,7 +40,7 @@ export default function Footer(){
                     </div>
                 </div>
                 <div class="col-12 col-md-3 d-none d-lg-block">
-                    <div class="d-flex flex-row justify-content-between mt-2">
+                    <div class="d-flex flex-row justify-content-between mt-5">
                         <div class="m-auto mt-5">
                             <h1 class="footer-section-head">Contact Us</h1>
                             <p class="footer-section-bottom-text"><i class="fa-solid fa-envelope footer-contact-logo mr-3"></i>hho@rguktrkv.ac.in</p>
@@ -50,7 +50,7 @@ export default function Footer(){
                     </div>
                 </div>
                 <div class="col-12 col-md-3 d-none d-lg-block">
-                    <div class="d-flex flex-row justify-content-between mt-2">
+                    <div class="d-flex flex-row justify-content-between mt-5">
                         <div class="m-auto mt-5">
                         <div class="social-media-logo-container">
                                 <a href='/' className='link-text'><i class="fa-brands fa-google social-media-logo"></i> hho.in </a>

@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import HeroSection from './components/herosection';
+import Testimonials from './components/testimonals';
+import Timeline from './components/timeline';
+
 
 function Home() {
   return (
     <div>
-        Home Page 
+        <HeroSection />
+        <Timeline />
+        <Testimonials />
     </div>
   )
 }

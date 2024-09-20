@@ -1,0 +1,99 @@
+.testimonials {
+  text-align: center;
+  padding: 50px;
+  background-color: #f9fafc;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.testimonials h2 span {
+  font-style: italic;
+}
+
+.testimonials p {
+  color: #7d7d7d;
+  margin-bottom: 50px;
+}
+
+.testimonials-container {
+  display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* min-width: 500px; */
+    gap: 25px;
+    overflow-x: auto;
+    margin-left: 0px;
+}
+
+.testimonial-card {
+  background-color: white;
+    border-radius: 10px;
+    /* padding: 20px; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-width: 240px;
+    max-width: 240px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stars {
+  color: #ffb400;
+  margin-bottom: 15px;
+}
+
+.client-info {
+  display: flex;
+    align-items: center;
+    background-color: #ff6b35; /* Orange color */
+    padding: 15px;
+    border-radius: 0 0 10px 10px; 
+}
+
+.client-info h3 {
+  margin: 0;
+  color: white; 
+  font-size: 1.2rem;
+}
+
+.client-info p {
+
+  margin: 0;
+}
+
+ 
+  /* For WebKit Browsers (Chrome, Safari, Edge) */
+  .testimonials-container {
+    overflow: auto; /* Enable scroll for this container */
+  }
+  
+  .testimonials-container::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  .testimonials-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    margin: 50px;
+  }
+  
+  .testimonials-container::-webkit-scrollbar-thumb {
+    background-color: #ff6b35; /* Color of the scrollbar handle (thumb) */
+    border-radius: 10px; /* Round corners on the scrollbar */
+    border: 2px solid #f1f1f1; /* Optional: Add a border around the thumb */
+    
+  }
+  
+  .testimonials-container::-webkit-scrollbar-thumb:hover {
+    background-color: #ff3c00; /* Change thumb color on hover */
+  }
+  
+  /* For Firefox */
+  .testimonials-container {
+    scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
+    scrollbar-color: #ff6b35 #f1f1f1; /* thumb color and track color */
+  }
+  

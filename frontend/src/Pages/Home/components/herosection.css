@@ -1,0 +1,13 @@
+@media (min-width: 992px) {
+    .car-img {
+      height: 90vh; /* Height for large and extra-large devices */
+    }
+  }
+  
+  .about-text{
+    text-align: center;
+  }
+  .about-button{
+    background-color: rgb(243, 146, 55);
+    color: white;
+  }
