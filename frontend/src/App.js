@@ -8,6 +8,7 @@ import Transactions from './Pages/Transactions/Transactions';
 import About from './Pages/About/About';
 import Services from './Pages/Ourservices/Services';
 import Login from './Pages/Login/Login';
+import Footer from './components/footer';
 function App() {
   return (
     <>
@@ -22,7 +23,7 @@ function App() {
         <Route path='/login' element={<Login />} />
 
       </Routes>
-
+    <Footer />
     </>
   );
 }

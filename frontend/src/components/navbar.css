@@ -10,22 +10,22 @@
     width: 70px;
 }
 
-/* #nav-item1 ,
+#nav-item1 ,
 #nav-item2,
 #nav-item3 ,
-#nav-item4{
+#nav-item4,
+#nav-item5{
     color: white;
     font-family: "Roboto";
     font-size: 20px;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 16px;
-} */
+} 
 
-
-/* .nav-link {
+ .nav-link {
     transition: all 0.5s;
-} */
+}
 a{
     font-size: 19px;
     text-decoration: none;
@@ -39,7 +39,7 @@ a:hover{
     border-radius: 24px;
     /* padding: 2px 6px; */
 }
-/* .nav-link:hover {
+.nav-link:hover {
     color: #ff9900 !important;
     background-color: white;
     border-radius: 16px;
@@ -53,8 +53,8 @@ a:hover{
     font-size: large;
     font-weight: bold;
     text-decoration: none;
-} */
-/* .nav-login:hover{
+}
+ .nav-login:hover{
     color: #e99e2e;
     text-decoration: none;
-} */
+} 

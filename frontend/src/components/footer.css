@@ -1,0 +1,50 @@
+.footer-section {
+    background-image: radial-gradient(#232c58, #203142);
+}
+
+.footer-section-logo {
+    height: 40px;
+    width: 60px;
+}
+
+.social-media-logo {
+    color: #f3ae47;
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.social-media-logo-container {   
+    margin: 8px 0px;
+}
+
+.footer-section-copyright {
+    color: #f3ae47;
+    font-size: 18px;
+}
+
+.footer-section-top-text {
+    color: #f3ae47;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.footer-section-head {
+    color: #f3ae47;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.footer-section-bottom-text ,
+.link-text{
+    color: #f3ae47;
+    font-size: 18px !important ;
+}
+
+.footer-contact-logo {
+    font-size: 18px;
+}
+
+.footer-hrule {
+    border-style: solid;
+    border-color: #f3ae47;
+}
