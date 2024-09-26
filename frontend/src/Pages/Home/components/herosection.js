@@ -1,12 +1,39 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import "./herosection.css";
 import { Link } from 'react-router-dom';
 export default function HeroSection() {
+
+
+
+  const sectionRef = useRef(null);  // Reference for the section
+  const [isVisible, setIsVisible] = useState(false);  // State to track visibility
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsVisible(entry.isIntersecting);  // Set visible state based on section's visibility
+      },
+      {
+        threshold: 0.1,  // Trigger when 10% of the section is visible
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);  // Start observing the section
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);  // Cleanup observer on unmount
+      }
+    };
+  }, []);
   return (
     <div>
   
 
-<div id="CarouselEx" className="carousel slide" data-ride="carousel" data-interval="2000">
+{/* <div id="CarouselEx" className="carousel slide" data-ride="carousel" data-interval="2000">
   <ol className="carousel-indicators">
     <li data-target="#CarouselEx" data-slide-to="0" className="active"></li>
     <li data-target="#CarouselEx" data-slide-to="1"></li>
@@ -43,29 +70,128 @@ export default function HeroSection() {
     <span className="carousel-control-next-icon" aria-hidden="true"></span>
     <span className="sr-only"></span>
   </a>
-</div>
+</div> */}
 
 
-        <div className="container-fluid p-3" style={{backgroundColor:'white'}}>
+        {/* <div className="container-fluid p-3" style={{backgroundColor:'white'}}>
             <div className="row ml-4 mr-4">
                 <div className="col-12">
                     <h1 className="about-head text-center mt-5">
                         About <span style={{color:'#f06529'}}>HHO</span>
                     </h1>
                 </div>
-                <div className="col-6">
-                    <img src="https://res.cloudinary.com/dnbeeynnu/image/upload/v1726826896/HHO/navbar/hho_logo_s548ea.png" alt="pic" className='w-100' style={{backgroundColor:'#ff8f66'}}  />
+                <div className="col-12 col-md-6">
+                    <img src="https://res.cloudinary.com/dnbeeynnu/image/upload/v1726826896/HHO/navbar/hho_logo_s548ea.png" alt="pic" className='w-100' />
                 </div>
-                <div className="col-6 m-auto">
-                    <p className="about-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus iure cupiditate quidem, itaque, tenetur alias illum, voluptatum recusandae neque culpa sunt! Quam blanditiis dicta eius voluptatem itaque animi alias velit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur facilis omnis similique quasi nulla et modi aut placeat perferendis quis. Corporis quo, illum nisi eaque ipsam voluptate quaerat fugiat explicabo?</p>
+                <div className="col-12 col-md-6">
+                    <p className="about-head-text text-center mt-md-5">HELPING HANDS ORGANISATION</p>
+                    <p className="about-text">At Helping Hands Organization, we believe in the power of community and compassion. Our mission is to uplift lives through meaningful service, empowering individuals to make a positive impact in their communities. Whether it's providing support during emergencies, organizing fundraising campaigns, or offering leadership and skill-building opportunities, HHO stands as a beacon of hope and generosity.
+                        Together, we foster a spirit of teamwork, empathy, and service, transforming lives and shaping a brighter future for all. Join us in making a difference—because with Helping Hands, every hand matters.</p>
                     <div className="text-center">
-                      <Link to='/about'><button className='btn about-button'>Read More</button></Link>
+                      <Link to='/about'><button className='btn about-button mt-md-5'>Read More</button></Link>
                     </div>
                    
                 </div>
   
             </div>
+        </div> */}
+
+    {/* <div className="container-fluid p-3" style={{ backgroundColor: 'white' }}>
+      <div className="row ml-4 mr-4">
+        <div className="col-12">
+          <h1 className="about-head text-center mt-5">
+            About <span style={{ color: '#f06529' }}>HHO</span>
+          </h1>
         </div>
+        <div className="col-12 col-md-6">
+          <img
+            src="https://res.cloudinary.com/dnbeeynnu/image/upload/v1726826896/HHO/navbar/hho_logo_s548ea.png"
+            alt="pic"
+            className="w-100"
+          />
+        </div>
+        <div className="col-12 col-md-6">
+          <p className="about-head-text text-center mt-md-5">HELPING HANDS ORGANISATION</p>
+          <p className="about-text">
+            At Helping Hands Organization, we believe in the power of community and compassion. Our
+            mission is to uplift lives through meaningful service, empowering individuals to make a
+            positive impact in their communities. Whether it's providing support during emergencies,
+            organizing fundraising campaigns, or offering leadership and skill-building opportunities,
+            HHO stands as a beacon of hope and generosity. Together, we foster a spirit of teamwork,
+            empathy, and service, transforming lives and shaping a brighter future for all. Join us in
+            making a difference—because with Helping Hands, every hand matters.
+          </p>
+          <div className="text-center">
+            <Link to="/about">
+              <button className="btn about-button mt-md-5">Read More</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div> */}
+
+
+
+    <section className="banner-container">
+      <div className="banner-content">
+        <h1 className="banner-title">Welcome to HHO Family</h1>
+        <p className="banner-subtitle">Help For The Needy</p>
+        <button className="btn about-button mt-md-5">Read More</button>
+      </div>
+      <div className="banner-image-container">
+        <img
+          src="https://example.com/your-image.jpg"
+          alt="Banner"
+          className="banner-image"
+        />
+      </div>
+    </section>
+
+
+
+
+
+
+
+<div
+      className={`container-fluid p-3 ${isVisible ? 'animate' : ''}`}  // Apply 'animate' class if section is visible
+      style={{ backgroundColor: 'white' }}
+      ref={sectionRef}  // Attach reference to the section
+    >
+      <div className="row ml-4 mr-4">
+        <div className="col-12">
+          <h1 className={`about-head text-center mt-5`}>
+            About <span style={{ color: '#f06529' }}>HHO</span>
+          </h1>
+        </div>
+        <div className="col-12 col-md-6">
+          <img
+            src="https://res.cloudinary.com/dnbeeynnu/image/upload/v1726826896/HHO/navbar/hho_logo_s548ea.png"
+            alt="pic"
+            className="w-100"
+          />
+        </div>
+        <div className="col-12 col-md-6">
+          <p className="about-head-text text-center mt-md-5">HELPING HANDS ORGANISATION</p>
+          <p className="about-text">
+            At Helping Hands Organization, we believe in the power of community and compassion.
+            Our mission is to uplift lives through meaningful service, empowering individuals to
+            make a positive impact in their communities. Whether it's providing support during
+            emergencies, organizing fundraising campaigns, or offering leadership and skill-building
+            opportunities, HHO stands as a beacon of hope and generosity. Together, we foster a
+            spirit of teamwork, empathy, and service, transforming lives and shaping a brighter
+            future for all. Join us in making a difference—because with Helping Hands, every hand
+            matters.
+          </p>
+          <div className="text-center">
+            <Link to="/about">
+              <button className="btn about-button mt-md-5">Read More</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
   )
 }

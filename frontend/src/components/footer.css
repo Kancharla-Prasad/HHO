@@ -1,5 +1,5 @@
 .footer-section {
-    background-image: radial-gradient(#232c58, #203142);
+    background-color: #f3f4f6;
 }
 
 .footer-section-logo {
@@ -8,7 +8,7 @@
 }
 
 .social-media-logo {
-    color: #f3ae47;
+    color: black;
     font-size: 24px;
     margin-right: 8px;
 }
@@ -18,26 +18,33 @@
 }
 
 .footer-section-copyright {
-    color: #f3ae47;
+    color: black;
     font-size: 18px;
 }
 
 .footer-section-top-text {
-    color: #f3ae47;
+    color: black;
     font-size: 22px;
     font-weight: 600;
 }
 
 .footer-section-head {
-    color: #f3ae47;
+    color: black;
     font-size: 22px;
     font-weight: bold;
 }
 
-.footer-section-bottom-text ,
-.link-text{
-    color: #f3ae47;
+.footer-section-bottom-text {
+    color: black;
     font-size: 18px !important ;
+    transition: all 0.25s;
+}
+
+
+.footer-section-bottom-text:hover{
+    margin-left: 10px;
+    color: #fa9a34;
+    text-decoration: none;
 }
 
 .footer-contact-logo {
@@ -46,5 +53,5 @@
 
 .footer-hrule {
     border-style: solid;
-    border-color: #f3ae47;
+    border-color: black;
 }
