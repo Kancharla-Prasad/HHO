@@ -149,12 +149,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import './navbar.css'; // Importing the styles
 import ProfileMenu from './profile';
+import { AppContext } from '../Context/Context';
 
 const drawerWidth = 280;
 const navItems = ['Home', 'Events', 'Transactions', 'Our Services', 'About Us'];
-const isLoged = false;
+// const isLoged = false;
 
 function DrawerAppBar(props) {
+
+  const{token,setToken} = React.useContext(AppContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -242,7 +245,7 @@ function DrawerAppBar(props) {
           </Box>
 
           {/* Right: Login button */}
-          {isLoged ? (
+          {token ? (
             <ProfileMenu />
           ) : (
             <Link className='nav-login ml-2' to='/login'> Login</Link>

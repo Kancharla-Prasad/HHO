@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, IconButton, Avatar, Tooltip, Menu, MenuItem, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { AppContext } from '../Context/Context';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard'];
 
 function ProfileMenu() {
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const{token,setToken} = useContext(AppContext);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -14,6 +17,11 @@ function ProfileMenu() {
     setAnchorElUser(null);
   };
 
+
+  const handleLogout = ()=>{
+      // localStorage.removeItem('token');
+      setToken(null);
+  }
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -39,9 +47,14 @@ function ProfileMenu() {
       >
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+           <Link to={`/${setting.toLowerCase()}`} ><Typography textAlign="center">{setting}</Typography> </Link>
+
           </MenuItem>
         ))}
+        <MenuItem onClick={handleCloseUserMenu}>
+           <Link to='/login' onClick={handleLogout} ><Typography textAlign="center">Logout</Typography> </Link>
+
+        </MenuItem>
       </Menu>
     </Box>
   );
