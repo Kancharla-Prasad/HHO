@@ -77,7 +77,6 @@ function LoginPage() {
 
     <div className='back-image login'>
       <img className="image" src="https://res.cloudinary.com/dnbeeynnu/image/upload/v1726826896/HHO/navbar/hho_logo_s548ea.png" alt='..' />
-
       <form action='' className='login-form'>
         <h1 className='login-title'>Welcome to HHO</h1>
         <div className='login-content'>

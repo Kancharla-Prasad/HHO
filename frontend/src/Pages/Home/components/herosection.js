@@ -134,17 +134,21 @@ export default function HeroSection() {
 
     <section className="banner-container">
       <div className="banner-content">
-        <h1 className="banner-title">Welcome to HHO Family</h1>
-        <p className="banner-subtitle">Help For The Needy</p>
-        <button className="btn about-button mt-md-5">Read More</button>
+        <h1 className="banner-title">Welcome to <span className='span'> HHO Family</span></h1>
+        <p className="banner-subtitle text-center">Help For The Needy</p>
+        <div>
+        <button className="btn about-button mt-md-5">Get Help</button>
+        <button className="btn about-button mt-md-5" style={{marginLeft:"20px"}}>Ourservices</button>
+        </div>
+        
       </div>
-      <div className="banner-image-container">
+       {/* <div className="banner-image-container">
         <img
           src="https://example.com/your-image.jpg"
           alt="Banner"
           className="banner-image"
         />
-      </div>
+      </div> */}
     </section>
 
 
@@ -160,8 +164,8 @@ export default function HeroSection() {
     >
       <div className="row ml-4 mr-4">
         <div className="col-12">
-          <h1 className={`about-head text-center mt-5`}>
-            About <span style={{ color: '#f06529' }}>HHO</span>
+          <h1 className={`about-head text-center mt-5 banner-title`}>
+            About <span className='span'>HHO</span>
           </h1>
         </div>
         <div className="col-12 col-md-6">

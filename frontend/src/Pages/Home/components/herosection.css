@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Playpen+Sans:wght@100..800&display=swap');
 @media (min-width: 992px) {
     .car-img {
       height: 90vh; /* Height for large and extra-large devices */
@@ -116,22 +116,33 @@
 
 .banner-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 50px;
-  background-color: #ffffff;
+  color: #ffffff;
   position: relative;
   overflow: hidden;
   height: 450px;
 }
-
+.banner-container{
+    background-image: url("https://img.freepik.com/premium-vector/handshake-human-help-icon_24877-1243.jpg?ga=GA1.1.979507765.1726655807&semt=ais_hybrid");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
 .banner-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   max-width: 50%;
   animation: fadeInLeft 1.5s ease-in-out;
 }
 
 .banner-title {
+  font-family: "Anton", sans-serif;
   font-size: 50px;
+  letter-spacing: 3px;
   font-weight: bold;
   color: #333;
   margin: 0;
@@ -142,6 +153,7 @@
   font-size: 1.5rem;
   color: #555;
   margin-top: 10px;
+  font-family: "Playpen Sans", cursive;
   animation: slideInBottom 2s ease-in-out;
 }
 
@@ -224,3 +236,10 @@
     transform: scale(1);
   }
 }
+@media screen and (max-width:800px)  {
+  .about-button{
+      margin-left: 0px !important;
+  }
+  
+} 
+  

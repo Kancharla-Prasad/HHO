@@ -197,8 +197,8 @@ const Testimonials = () => {
 
   return (
     <section className="testimonials">
-      <h2>What People Say <span>About Us</span></h2>
-      <p>Some of our members , staff , students shared their their thoughts.</p>
+      <h2 className='banner-title'>What People Say <span className='span'>About Us</span></h2>
+      <p style={{fontFamily:'Playpen Sans, cursive',}}>Some of our members , staff , students shared their their thoughts.</p>
       <div
         className="testimonials-container"
         ref={testimonialsRef}

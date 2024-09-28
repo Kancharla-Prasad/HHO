@@ -157,13 +157,14 @@ const Timeline = () => {
     return (
         <div className='main'>
             <div className="background">
-                <h1> HHO <span> Body </span> </h1>
+                <h2 className='banner-title text-center mt-5'> Structure Of <span className='span'> HHO </span> </h2>
                 <div className='timeline' ref={timelineRef}>
                     {/* The line element */}
                     <div ref={lineRef} className="timeline-line"></div>
 
                     <div className='member-card left-container'>
-                        <img src="logo192.png" alt='Core' />
+                        {/* <img src="logo192.png" alt='Core' /> */}
+                        <i className="fa-solid fa-c" style={{color: "white"}}></i>
                         <div className='text-box corecard'>
                             <h2 className='coretext'> Core </h2>
                             <p>
@@ -173,7 +174,8 @@ const Timeline = () => {
                         </div>
                     </div>
                     <div className='member-card right-container'>
-                        <img src="logo192.png" alt='Accountant' />
+                       {/* <img src="https://img.freepik.com/premium-vector/creative-c-letter-vector-icon-cartoon-illustration_1316704-4699.jpg?ga=GA1.1.979507765.1726655807&semt=ais_hybrid" alt=""/> */}
+                       <i className="fa-solid fa-a" style={{color: "white"}}></i>
                         <div className='text-box accountcard'>
                             <h2 className='accounttext'> Accountant </h2>
                             <p>
@@ -183,7 +185,8 @@ const Timeline = () => {
                         </div>
                     </div>
                     <div className='member-card left-container'>
-                        <img src="logo192.png" alt='Executive' />
+                        {/* <img src="logo192.png" alt='Executive' /> */}
+                        <i className="fa-solid fa-e" style={{color: "white"}}></i>
                         <div className='text-box executivecard'>
                             <h2 className='executivetext'> Executive </h2>
                             <p>
@@ -193,7 +196,8 @@ const Timeline = () => {
                         </div>
                     </div>
                     <div className='member-card right-container'>
-                        <img src="logo192.png" alt='HR' />
+                        {/* <img src="logo192.png" alt='HR' /> */}
+                        <i className="fa-solid fa-h" style={{color: "white"}}></i>
                         <div className='text-box hrcard'>
                             <h2 className='hrtext'> HR </h2>
                             <p>
