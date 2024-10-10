@@ -152,6 +152,7 @@ a{
     .login-form{
         border:2px solid #fa9a34;
         box-shadow: 2px 2px 2px 2px #fa9a34;
+        padding: 10px;
     }
   }
   
