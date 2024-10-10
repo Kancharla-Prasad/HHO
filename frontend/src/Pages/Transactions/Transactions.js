@@ -8,7 +8,8 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import CountUp from 'react-countup';
 import Button from '@mui/material/Button';
-import { styled, textAlign } from '@mui/system';
+import { styled } from '@mui/system';
+import useMediaQuery from '@mui/material/useMediaQuery'; 
 const getCardColor = (type) => {
   switch (type) {
     case 'donations':
@@ -85,7 +86,7 @@ function TransactionPage() {
   
   const renderCard = (type, description,date,amount) => (
     <Cardtemplate sx={{ minWidth: 275, marginBottom: 2,cursor:"pointer" ,fontFamily:'"Playpen Sans", cursive'}}>
-      <CardContent sx={{display:"flex",justifyContent:"space-evenly",alignItems:"center",color:"white" , backgroundColor:getCardColor(type)}}>
+      <CardContent sx={{display: isMobile ? "block":"flex",justifyContent:"space-evenly",alignItems:"center",color:"white" , backgroundColor:getCardColor(type)}}>
         <Typography variant="h5" component="div">
         {type === 'credit' && <AddCircleIcon  sx={{fontSize:"30px"}} />}
         {type === 'debit' && <RemoveCircleIcon sx={{fontSize:"30px"}}/>}
@@ -103,10 +104,10 @@ function TransactionPage() {
       </CardContent>
     </Cardtemplate>
   );
-
+  const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <div>
-      <Box sx={{ display:"flex",justifyContent:"center",alignItems:"center",height: "50vh",backgroundColor:"whitesmoke"}}>
+      <Box sx={{ display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"whitesmoke"}}>
         <div>
         <h1 className='about-title text-center' ><span className='span'>Transactions</span></h1>
           <figure className="text-center">
@@ -126,19 +127,19 @@ function TransactionPage() {
         </div>
         
      </Box>
-      <Box sx={{ display: 'flex', height: '100vh', width: '100%', marginTop: 4 }}>
+      <Box sx={{ display:isMobile ? "block":'flex', height: 'auto', width: '100%', marginTop: 4 }}>
       {/* Sidebar Tabs */}
-      <Box sx={{ width: '200px', p: 2 }}>
+      <Box sx={{ width: isMobile ? '100%' : '200px', p: 2 }}>
         <Tabs
-          orientation="vertical"
+          orientation={isMobile ? 'horizontal' : 'vertical'}
           value={value}
           onChange={handleChange}
           aria-label="transaction tabs"
           TabIndicatorProps={{ style: { display: 'none' } }} // Hides the default tab indicator
         >
-          <CustomTab label="credit" sx={{margin:"20px",fontFamily:'"Playpen Sans", cursive'}}/>
-          <CustomTab label="debit" sx={{margin:"20px",fontFamily:'"Playpen Sans", cursive'}}/>
-          <CustomTab label="donations" sx={{margin:"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+          <CustomTab label="credit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+          <CustomTab label="debit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+          <CustomTab label="donations" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
         </Tabs>
       </Box>
 
@@ -146,6 +147,7 @@ function TransactionPage() {
       <Box sx={{ flexGrow: 1, p: 2 }}>
         <TabPanel value={value} index={0}>
           {renderCard('credit', 'Details about the credit transaction.',"20-09-2024","20000/-")}
+          {renderCard('credit', 'Details about another credit transaction.',"20-09-2024","20000/-")}
           {renderCard('credit', 'Details about another credit transaction.',"20-09-2024","20000/-")}
         </TabPanel>
         <TabPanel value={value} index={1}>
