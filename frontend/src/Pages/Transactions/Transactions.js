@@ -107,7 +107,7 @@ function TransactionPage() {
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <div>
-      <Box sx={{ display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"whitesmoke"}}>
+      <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"whitesmoke"}}>
         <div>
         <h1 className='about-title text-center' ><span className='span'>Transactions</span></h1>
           <figure className="text-center">
@@ -121,7 +121,7 @@ function TransactionPage() {
             <figcaption className="blockquote-footer">
               <cite title="Source Title" style={{ fontSize: "18px" }} className='about-content'>Helping Hands Organization</cite>
             </figcaption>
-            <ButtonType variant="contained" sx={{marginTop:"15px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
+            <ButtonType variant="contained" sx={{marginTop:"50px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
           </figure>
          
         </div>
