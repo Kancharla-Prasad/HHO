@@ -153,7 +153,7 @@ import { AppContext } from '../Context/Context';
 
 const drawerWidth = 280;
 const navItems = ['Home', 'Events', 'Transactions', 'Our Services', 'About Us'];
-// const isLoged = false;
+// const isLoged = true;
 
 function DrawerAppBar(props) {
 

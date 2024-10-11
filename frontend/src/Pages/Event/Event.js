@@ -1,9 +1,10 @@
 import React from 'react'
+import Slider from './components/slider'
 
 function Event() {
   return (
     <div>
-      Event page
+      <Slider />
     </div>
   )
 }
