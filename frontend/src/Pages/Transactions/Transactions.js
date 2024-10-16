@@ -8,8 +8,11 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import CountUp from 'react-countup';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/system';
+import { styled,alpha, borderColor} from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery'; 
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const getCardColor = (type) => {
   switch (type) {
     case 'donations':
@@ -34,9 +37,9 @@ const CustomTab = styled(Tab)(({ theme }) => ({
     boxShadow:"5px 5px 2px #fa9a34"
   },
   '&:not(.Mui-selected)': {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#ffffff',
     color: '#000',
-    border:"none",
+    border:"1px solid #fa9a34",
     outline:"none",
     transition:"1.5s",
   },
@@ -45,6 +48,7 @@ const CustomTab = styled(Tab)(({ theme }) => ({
   fontSize:"18px"
 }));
 const Cardtemplate = styled(Card)(({ theme }) => ({
+  boxShadow:"0px",
   '&:hover': {
     boxShadow: "2px 2px 2px 2px gray",
   },
@@ -53,6 +57,41 @@ const ButtonType = styled(Button)(({ theme }) => ({
   backgroundColor:"#fa9a34",
   padding:"17px",
   fontSize:"18px"
+}));
+const Search = styled('div')(() => ({
+  position: 'relative',
+  borderRadius: '4px',
+  border:"1px solid #fa9a34",  // You can use fixed values instead of theme properties  // Directly using white color
+  '&:hover': {
+    border:"1px solid #fa9a34" // Darken white on hover
+  },
+  '@media (min-width:600px)': {
+    marginLeft: '24px',
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(() => ({
+  padding: '0 20px',
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(() => ({
+  color: '#fa9a34',
+  '& .MuiInputBase-input': {
+    padding: '8px 8px 8px 0',  // Vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + 32px)`,
+    transition: 'width 200ms ease-in-out',
+    width: '50%',
+    '@media (min-width:960px)': {
+      width: '20ch',
+    },
+  },
 }));
 
 
@@ -78,6 +117,7 @@ function TabPanel(props) {
 }
 
 function TransactionPage() {
+  
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -86,28 +126,31 @@ function TransactionPage() {
   
   const renderCard = (type, description,date,amount) => (
     <Cardtemplate sx={{ minWidth: 275, marginBottom: 2,cursor:"pointer" ,fontFamily:'"Playpen Sans", cursive'}}>
-      <CardContent sx={{display: isMobile ? "block":"flex",justifyContent:"space-evenly",alignItems:"center",color:"white" , backgroundColor:getCardColor(type)}}>
-        <Typography variant="h5" component="div">
-        {type === 'credit' && <AddCircleIcon  sx={{fontSize:"30px"}} />}
-        {type === 'debit' && <RemoveCircleIcon sx={{fontSize:"30px"}}/>}
-        {type === 'donations' && <HandshakeIcon sx={{fontSize:"40px"}}/>}
-        </Typography>
-        <Typography sx={{ mb: 1.5,fontFamily:'"Playpen Sans", cursive'}}>
-          {description}
-        </Typography>
-        <Typography sx={{ mb: 1.5, backgroundColor:"white",borderRadius:"50px",padding:"10px 15px" ,color:"black",fontFamily:'"Playpen Sans", cursive'}}>
-          {date}
-        </Typography>
-        <Typography sx={{ mb: 1.5, backgroundColor:"white",borderRadius:"50px",padding:"10px 15px" ,color:"black",fontFamily:'"Playpen Sans", cursive'}}>
-          {amount}
-        </Typography>
+      <CardContent sx={{display: isMobile ? "block":"flex",gap:"20px",flexDirection:"column",alignContent:"space-between",color:"black" ,borderBottom:"2px solid ",borderTop:"2px solid ", borderColor:getCardColor(type)}}>
+        <div style={{display:"flex",justifyContent:"space-between"}}>
+          <Typography variant="h5" component="div" sx={{padding:"10px 15px" , border:"1px solid",borderColor:getCardColor(type),borderRadius:"15px"}}>
+          {type === 'credit' && <AddCircleIcon  sx={{fontSize:"30px",color:getCardColor(type)}} />}
+          {type === 'debit' && <RemoveCircleIcon sx={{fontSize:"30px",color:getCardColor(type)}}/>}
+          {type === 'donations' && <HandshakeIcon sx={{fontSize:"30px",color:getCardColor(type)}}/>}
+          &nbsp;&nbsp;<span style={{fontSize:"18px"}}>{amount}</span>
+          </Typography>
+          <Typography sx={{ mb: 1.5, backgroundColor:"white",borderRadius:"50px",padding:"10px 15px" ,color:"black",fontFamily:'"Playpen Sans", cursive'}}>
+          <CalendarMonthIcon sx={{color:getCardColor(type)}}/> {date}
+          </Typography>
+        </div>
+        <div>
+          <Typography sx={{ mb: 1.5,fontFamily:'"Playpen Sans", cursive'}}>
+            <span style={{color:getCardColor(type),fontWeight:"600"}}>{type} On </span><br/> {description}
+          </Typography>
+        </div>
       </CardContent>
     </Cardtemplate>
   );
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
+    
     <div>
-      <Box sx={{ display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"whitesmoke"}}>
+      <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"white"}}>
         <div>
         <h1 className='about-title text-center' ><span className='span'>Transactions</span></h1>
           <figure className="text-center">
@@ -121,15 +164,24 @@ function TransactionPage() {
             <figcaption className="blockquote-footer">
               <cite title="Source Title" style={{ fontSize: "18px" }} className='about-content'>Helping Hands Organization</cite>
             </figcaption>
-            <ButtonType variant="contained" sx={{marginTop:"15px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
+            <ButtonType variant="contained" sx={{marginTop:"50px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
+            <Search sx={{marginTop:"50px"}}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search the transaction"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           </figure>
          
         </div>
         
      </Box>
-      <Box sx={{ display:isMobile ? "block":'flex', height: 'auto', width: '100%', marginTop: 4 }}>
+      <Box sx={{ display:isMobile ? "block":'flex', height: 'auto', width: '100%', marginTop: 4 ,backgroundColor:"whitesmoke"}}>
       {/* Sidebar Tabs */}
-      <Box sx={{ width: isMobile ? '100%' : '200px', p: 2 }}>
+      <Box sx={{ width: isMobile ? '100%' : '250px', p: 2, }}>
         <Tabs
           orientation={isMobile ? 'horizontal' : 'vertical'}
           value={value}
@@ -144,7 +196,7 @@ function TransactionPage() {
       </Box>
 
       {/* Tab Panels */}
-      <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Box sx={{ flexGrow: 1, p: 2,padding:isMobile ? "0px 0px":"0px 100px" }}>
         <TabPanel value={value} index={0}>
           {renderCard('credit', 'Details about the credit transaction.',"20-09-2024","20000/-")}
           {renderCard('credit', 'Details about another credit transaction.',"20-09-2024","20000/-")}
