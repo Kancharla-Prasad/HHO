@@ -1,30 +1,82 @@
 // import React from 'react'
 
 
-import React, { useState } from 'react';
-import { Box, Tab, Tabs, Typography, Card, CardContent } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import HandshakeIcon from '@mui/icons-material/Handshake';
+import React, { useState,useEffect } from 'react';
+import { Box, Tab, Tabs, Typography,Pagination } from '@mui/material';
 import CountUp from 'react-countup';
 import Button from '@mui/material/Button';
-import { styled,alpha, borderColor} from '@mui/system';
+import { styled} from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery'; 
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-const getCardColor = (type) => {
-  switch (type) {
-    case 'donations':
-      return '#fa9a34'; // Purple for donations
-    case 'credit':
-      return '#4caf50'; // Green for credit
-    case 'debit':
-      return '#f44336'; // Red for debit
-    default:
-      return '#e0e0e0'; // Default gray if type doesn't match
-  }
-};
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import {ThemeProvider,createTheme } from '@mui/material'
+import TransactionCard from './TransactionCard';
+
+//customization
+
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#fa9a34',
+    },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '& fieldset': {
+            border:"2px solid #fa9a34",
+            borderColor: '#fa9a34', // Default border color
+          },
+          '&:hover fieldset': {
+            borderColor: '#fa9a34', // Border on hover
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#fa9a34', // Border on focus
+          },
+          
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34', // Default border color for Select
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34',
+          },
+        },
+        icon: {
+          color: '#fa9a34', // Icon color
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: '#fa9a34',
+            color: 'white',
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#fa9a34',
+            color: 'white',
+          },
+        },
+      },
+    },
+  },
+});
+
+
 
 // Customizing Tab to change colors when active
 const CustomTab = styled(Tab)(({ theme }) => ({
@@ -47,52 +99,13 @@ const CustomTab = styled(Tab)(({ theme }) => ({
   borderRadius:"10px",
   fontSize:"18px"
 }));
-const Cardtemplate = styled(Card)(({ theme }) => ({
-  boxShadow:"0px",
-  '&:hover': {
-    boxShadow: "2px 2px 2px 2px gray",
-  },
-}));
+
 const ButtonType = styled(Button)(({ theme }) => ({
   backgroundColor:"#fa9a34",
   padding:"17px",
   fontSize:"18px"
 }));
-const Search = styled('div')(() => ({
-  position: 'relative',
-  borderRadius: '4px',
-  border:"1px solid #fa9a34",  // You can use fixed values instead of theme properties  // Directly using white color
-  '&:hover': {
-    border:"1px solid #fa9a34" // Darken white on hover
-  },
-  '@media (min-width:600px)': {
-    marginLeft: '24px',
-    width: 'auto',
-  },
-}));
 
-const SearchIconWrapper = styled('div')(() => ({
-  padding: '0 20px',
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(() => ({
-  color: '#fa9a34',
-  '& .MuiInputBase-input': {
-    padding: '8px 8px 8px 0',  // Vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + 32px)`,
-    transition: 'width 200ms ease-in-out',
-    width: '50%',
-    '@media (min-width:960px)': {
-      width: '20ch',
-    },
-  },
-}));
 
 
 // Custom TabPanel Component
@@ -116,107 +129,314 @@ function TabPanel(props) {
   );
 }
 
-function TransactionPage() {
-  
-  const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+//function transactionPage starts
+// function TransactionPage() {
+
+
   
-  const renderCard = (type, description,date,amount) => (
-    <Cardtemplate sx={{ minWidth: 275, marginBottom: 2,cursor:"pointer" ,fontFamily:'"Playpen Sans", cursive'}}>
-      <CardContent sx={{display: isMobile ? "block":"flex",gap:"20px",flexDirection:"column",alignContent:"space-between",color:"black" ,borderBottom:"2px solid ",borderTop:"2px solid ", borderColor:getCardColor(type)}}>
-        <div style={{display:"flex",justifyContent:"space-between"}}>
-          <Typography variant="h5" component="div" sx={{padding:"10px 15px" , border:"1px solid",borderColor:getCardColor(type),borderRadius:"15px"}}>
-          {type === 'credit' && <AddCircleIcon  sx={{fontSize:"30px",color:getCardColor(type)}} />}
-          {type === 'debit' && <RemoveCircleIcon sx={{fontSize:"30px",color:getCardColor(type)}}/>}
-          {type === 'donations' && <HandshakeIcon sx={{fontSize:"30px",color:getCardColor(type)}}/>}
-          &nbsp;&nbsp;<span style={{fontSize:"18px"}}>{amount}</span>
-          </Typography>
-          <Typography sx={{ mb: 1.5, backgroundColor:"white",borderRadius:"50px",padding:"10px 15px" ,color:"black",fontFamily:'"Playpen Sans", cursive'}}>
-          <CalendarMonthIcon sx={{color:getCardColor(type)}}/> {date}
-          </Typography>
-        </div>
-        <div>
-          <Typography sx={{ mb: 1.5,fontFamily:'"Playpen Sans", cursive'}}>
-            <span style={{color:getCardColor(type),fontWeight:"600"}}>{type} On </span><br/> {description}
-          </Typography>
-        </div>
-      </CardContent>
-    </Cardtemplate>
-  );
-  const isMobile = useMediaQuery('(max-width:600px)');
-  return (
+
+//   const [transactions, setTransactions] = useState([]);
+//   const [creditTransactions, setCreditTransactions] = useState([]);
+//   const [debitTransactions, setDebitTransactions] = useState([]);
+//   const [donationTransactions, setDonationTransactions] = useState([]);
+
+
+//   const [value, setValue] = useState(0);
+//   const [filter, setFilter] = useState('');
+
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
+  
+//   const handleSearch = (event) => {
+//     setFilter(event.target.value);
+//   };
+
+//   const isMobile = useMediaQuery('(max-width:600px)');
+
+//   useEffect(() => {
+//     fetch('/transactions.json')
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setTransactions(data);
+//         setCreditTransactions(data.filter((t) => t.type === 'credit'));
+//         setDebitTransactions(data.filter((t) => t.type === 'debit'));
+//         setDonationTransactions(data.filter((t) => t.type === 'donations'));
+//       })
+//       .catch((error) => console.error('Error fetching transactions:', error));
+//   }, []);
+
+  
+  
+//   return (
     
-    <div>
-      <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"white"}}>
+//     <>
+//       <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height: "70vh",backgroundColor:"white"}}>
+//         <div>
+//           <h1 className='about-title text-center' ><span className='span'>Transactions</span></h1>
+//           <figure className="text-center">
+//           <blockquote className="blockquote">
+//               <p className='about-content'>
+//               "At Helping Hands, every contribution counts, and every transaction is transparent. <br/>
+//               Every penny you give goes exactly where you expect it to.<br/>
+//               Your trust is our strength, and together, we build a brighter future."
+//               </p>
+//             </blockquote>
+//             <figcaption className="blockquote-footer">
+//               <cite title="Helping Hands Organization" style={{ fontSize: "18px" }} className='about-content'>Helping Hands Organization</cite>
+//             </figcaption>
+//             <ButtonType variant="contained" sx={{marginTop:"50px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
+           
+//           </figure>
+//         </div>
+        
+//      </Box>
+//       <Box sx={{ display:isMobile ? "block":'flex', height: '70vh', width: '100%', marginTop: 4 ,backgroundColor:"whitesmoke",overflowY:"scroll"}}>
+//       {/* Sidebar Tabs */}
+//       <Box sx={{ width: isMobile ? '100%' : '250px', p: 2, }}>
+//         <Tabs
+//           orientation={isMobile ? 'horizontal' : 'vertical'}
+//           value={value}
+//           onChange={handleChange}
+//           aria-label="transaction tabs"
+//           TabIndicatorProps={{ style: { display: 'none' } }} // Hides the default tab indicator
+//         >
+//           <CustomTab label="All" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+//           <CustomTab label="Credit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+//           <CustomTab label="Debit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+//           <CustomTab label="Donations" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
+//         </Tabs>
+//       </Box>
+
+//       {/* Tab Panels */}
+//       <Box sx={{ flexGrow: 1, p: 2,padding:isMobile ? "0px 0px":"0px 100px" }}>
+//       <ThemeProvider theme={customTheme}>
+//         <div className='row' style={{margin:"20px"}}>
+//           <div className='col-12 col-md-6 mt-3'>
+//               <TextField id="outlined-basic" label="Search" variant="outlined" sx={{width:"100%"}} />
+//           </div>
+//           <div className='col-12 col-md-6 mt-3'>
+//             <div>
+//             <FormControl fullWidth>
+//                 <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
+//                 <Select
+//                   labelId="demo-simple-select-label"
+//                   id="demo-simple-select"
+//                   value={filter}
+//                   label="Filer By"
+//                   onChange={handleSearch}
+//                 >
+//                   <MenuItem value={'amount'}>Amount</MenuItem>
+//                   <MenuItem value={'date'}>Date</MenuItem>
+//                   <MenuItem value={'event'}>Events</MenuItem>
+//                 </Select>
+//               </FormControl>
+           
+//             </div> 
+//           </div>
+//         </div>
+//         </ThemeProvider>
+//         <TabPanel value={value} index={0} >
+//           {transactions.map((transaction) => (
+//           <TransactionCard key={transaction.id} transaction={transaction} />
+//           ))}
+//         </TabPanel>
+
+//         <TabPanel value={value} index={1}>
+//            {creditTransactions.map((transaction) => (
+//           <TransactionCard key={transaction.id} transaction={transaction} />
+//           ))}
+//         </TabPanel>
+
+//         <TabPanel value={value} index={2}>
+//            {debitTransactions.map((transaction) => (
+//           <TransactionCard key={transaction.id} transaction={transaction} />
+//         ))}
+//         </TabPanel>
+
+//         <TabPanel value={value} index={3}>
+//            {donationTransactions.map((transaction) => (
+//           <TransactionCard key={transaction.id} transaction={transaction} />
+//         ))}
+//         </TabPanel>
+//       </Box>
+//     </Box>
+//     </>
+    
+//   );
+// }
+
+
+function TransactionPage() {
+  const [transactions, setTransactions] = useState([]);
+  const [creditTransactions, setCreditTransactions] = useState([]);
+  const [debitTransactions, setDebitTransactions] = useState([]);
+  const [donationTransactions, setDonationTransactions] = useState([]);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  useEffect(() => {
+    fetch('/transactions.json')
+      .then((response) => response.json())
+      .then((data) => {
+        setTransactions(data);
+        setCreditTransactions(data.filter((t) => t.type === 'credit'));
+        setDebitTransactions(data.filter((t) => t.type === 'debit'));
+        setDonationTransactions(data.filter((t) => t.type === 'donations'));
+      })
+      .catch((error) => console.error('Error fetching transactions:', error));
+  }, []);
+
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => setValue(newValue);
+  const [filter, setFilter] = useState('');
+  const handleSearch = (event) => setFilter(event.target.value);
+  const isMobile = useMediaQuery('(max-width:600px)');
+
+  // Get paginated data based on the current tab and page
+  const paginateData = (data) => {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return data.slice(start, end);
+  };
+
+  return (
+    <>
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh", backgroundColor: "white" }}>
         <div>
-        <h1 className='about-title text-center' ><span className='span'>Transactions</span></h1>
+          <h1 className='about-title text-center'><span className='span'>Transactions</span></h1>
           <figure className="text-center">
-          <blockquote className="blockquote">
+            <blockquote className="blockquote">
               <p className='about-content'>
-              "At Helping Hands, every contribution counts, and every transaction is transparent. <br/>
-              Every penny you give goes exactly where you expect it to.<br/>
-              Your trust is our strength, and together, we build a brighter future."
+                "At Helping Hands, every contribution counts, and every transaction is transparent. <br />
+                Every penny you give goes exactly where you expect it to.<br />
+                Your trust is our strength, and together, we build a brighter future."
               </p>
             </blockquote>
             <figcaption className="blockquote-footer">
-              <cite title="Source Title" style={{ fontSize: "18px" }} className='about-content'>Helping Hands Organization</cite>
+              <cite title="Helping Hands Organization" style={{ fontSize: "18px" }} className='about-content'>Helping Hands Organization</cite>
             </figcaption>
-            <ButtonType variant="contained" sx={{marginTop:"50px"}}> Current Balance &nbsp;&nbsp;:  &nbsp;&nbsp;<CountUp end={3000000} /></ButtonType>
-            <Search sx={{marginTop:"50px"}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search the transaction"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+            <ButtonType variant="contained" sx={{ marginTop: "50px" }}>
+              Current Balance &nbsp;&nbsp;: &nbsp;&nbsp;<CountUp end={3000000} />
+            </ButtonType>
           </figure>
-         
         </div>
-        
-     </Box>
-      <Box sx={{ display:isMobile ? "block":'flex', height: 'auto', width: '100%', marginTop: 4 ,backgroundColor:"whitesmoke"}}>
-      {/* Sidebar Tabs */}
-      <Box sx={{ width: isMobile ? '100%' : '250px', p: 2, }}>
-        <Tabs
-          orientation={isMobile ? 'horizontal' : 'vertical'}
-          value={value}
-          onChange={handleChange}
-          aria-label="transaction tabs"
-          TabIndicatorProps={{ style: { display: 'none' } }} // Hides the default tab indicator
-        >
-          <CustomTab label="credit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
-          <CustomTab label="debit" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
-          <CustomTab label="donations" sx={{margin: isMobile ? "10px":"20px",fontFamily:'"Playpen Sans", cursive'}}/>
-        </Tabs>
       </Box>
 
-      {/* Tab Panels */}
-      <Box sx={{ flexGrow: 1, p: 2,padding:isMobile ? "0px 0px":"0px 100px" }}>
-        <TabPanel value={value} index={0}>
-          {renderCard('credit', 'Details about the credit transaction.',"20-09-2024","20000/-")}
-          {renderCard('credit', 'Details about another credit transaction.',"20-09-2024","20000/-")}
-          {renderCard('credit', 'Details about another credit transaction.',"20-09-2024","20000/-")}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {renderCard('debit', 'Details about the debit transaction.',"20-09-2024","20000/-")}
-          {renderCard('debit', 'Details about another debit transaction.',"20-09-2024","20000/-")}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {renderCard('donations', 'Details about the donation.',"20-09-2024","20000/-")}
-          {renderCard('donations', 'Details about another donation.',"20-09-2024","20000/-")}
-        </TabPanel>
+      <Box sx={{ display: isMobile ? "block" : 'flex', height: 'auto', width: '100%', marginTop: 4, backgroundColor: "whitesmoke", }}>
+        {/* Sidebar Tabs */}
+        <Box sx={{ width: isMobile ? '100%' : '250px', p: 2 }}>
+          <Tabs
+            orientation={isMobile ? 'horizontal' : 'vertical'}
+            value={value}
+            onChange={handleChange}
+            aria-label="transaction tabs"
+            TabIndicatorProps={{ style: { display: 'none' } }}
+          >
+            <CustomTab label="All" sx={{ margin: isMobile ? "10px" : "20px", fontFamily: '"Playpen Sans", cursive' }} />
+            <CustomTab label="Credit" sx={{ margin: isMobile ? "10px" : "20px", fontFamily: '"Playpen Sans", cursive' }} />
+            <CustomTab label="Debit" sx={{ margin: isMobile ? "10px" : "20px", fontFamily: '"Playpen Sans", cursive' }} />
+            <CustomTab label="Donations" sx={{ margin: isMobile ? "10px" : "20px", fontFamily: '"Playpen Sans", cursive' }} />
+          </Tabs>
+        </Box>
+
+        {/* Tab Panels with Pagination */}
+        <Box sx={{ flexGrow: 1, p: 2, padding: isMobile ? "0px 0px" : "0px 100px" }}>
+          <ThemeProvider theme={customTheme}>
+            <div className='row' style={{ margin: "20px" }}>
+              <div className='col-12 col-md-6 mt-3'>
+                <TextField id="outlined-basic" label="Search" variant="outlined" sx={{ width: "100%" }} />
+              </div>
+              <div className='col-12 col-md-6 mt-3'>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={filter}
+                    label="Filter By"
+                    onChange={handleSearch}
+                  >
+                    <MenuItem value={'amount'}>Amount</MenuItem>
+                    <MenuItem value={'date'}>Date</MenuItem>
+                    <MenuItem value={'event'}>Events</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+
+            {/* TabPanel for All Transactions */}
+            <TabPanel value={value} index={0}>
+              {paginateData(transactions).map((transaction) => (
+                <TransactionCard key={transaction.id} transaction={transaction} />
+              ))}
+              <Pagination
+                count={Math.ceil(transactions.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                sx={{ mt: 2 }}
+                shape='rounded'
+                color="primary"
+              />
+            </TabPanel>
+
+            {/* TabPanel for Credit Transactions */}
+            <TabPanel value={value} index={1}>
+              {paginateData(creditTransactions).map((transaction) => (
+                <TransactionCard key={transaction.id} transaction={transaction} />
+              ))}
+              <Pagination
+                count={Math.ceil(creditTransactions.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                sx={{ mt: 2 }}
+                shape='rounded'
+                color="primary"
+              />
+            </TabPanel>
+
+            {/* TabPanel for Debit Transactions */}
+            <TabPanel value={value} index={2}>
+              {paginateData(debitTransactions).map((transaction) => (
+                <TransactionCard key={transaction.id} transaction={transaction} />
+              ))}
+              <Pagination
+                count={Math.ceil(debitTransactions.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                sx={{ mt: 2 }}
+                shape='rounded'
+                color="primary"
+              />
+            </TabPanel>
+
+            {/* TabPanel for Donations */}
+            <TabPanel value={value} index={3}>
+              {paginateData(donationTransactions).map((transaction) => (
+                <TransactionCard key={transaction.id} transaction={transaction} />
+              ))}
+              <Pagination
+                count={Math.ceil(donationTransactions.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                sx={{ mt: 2}}
+                shape='rounded'
+                color="primary"
+              />
+            </TabPanel>
+          </ThemeProvider>
+        </Box>
       </Box>
-    </Box>
-    </div>
-    
+    </>
   );
 }
-
 export default TransactionPage;
 
 

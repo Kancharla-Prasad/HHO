@@ -1,0 +1,52 @@
+[
+    {
+      "id": 1,
+      "type": "credit",
+      "description": "Details about the credit transaction.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 2,
+      "type": "credit",
+      "description": "Details about another credit transaction.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 3,
+      "type": "credit",
+      "description": "Details about another credit transaction.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 4,
+      "type": "debit",
+      "description": "Details about the debit transaction.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 5,
+      "type": "debit",
+      "description": "Details about another debit transaction.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 6,
+      "type": "donations",
+      "description": "Details about the donation.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    },
+    {
+      "id": 7,
+      "type": "donations",
+      "description": "Details about another donation.",
+      "date": "20-09-2024",
+      "amount": "20000/-"
+    }
+  ]
+  

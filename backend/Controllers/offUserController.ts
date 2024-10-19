@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import offUserModel from "../models/off_users";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import { OffUserDocument } from "../types/offUserType";
 import dotenv from  'dotenv';
 dotenv.config()
@@ -15,30 +16,32 @@ interface IPayload {
   };
 }
 
-export const offUserLogin = async (req: Request, res: Response) => {
+export const offUserLogin = async (
+  req: Request,
+  res: Response
+)=> {
   try {
     const { email, password } = req.body;
 
-    // Validate input fields
     if (!email || !password) {
-      res.status(400).json({ Error: "True", Message: "All fields are required." });
-      return;
+       res.json({ Error: "True", Message: "All Fields Required..." });
     }
-    
-    // Check if the user exists
+
     const userExist = await offUserModel.findOne({ email }) as OffUserDocument;
+
     if (!userExist) {
-        res.status(401).json({ Error: "True", Message: "Invalid email or password." });
-        return;
+      res.json({
+        Error: "True",
+        Message: "Login with Valid Credentials....",
+      });
     }
 
-    // Validate password (you may want to hash and compare passwords in real-world scenarios)
     if (password !== userExist.password) {
-       res.status(401).json({ Error: "True", Message: "Invalid email or password." });
-       return;
+      res.json({
+        Error: "True",
+        Message: "Login with Valid Credentials...",
+      });
     }
-
-    // Create a JWT payload
     const payload: IPayload = {
       user: {
         id: String(userExist._id),
@@ -46,24 +49,18 @@ export const offUserLogin = async (req: Request, res: Response) => {
       },
     };
 
-    // Generate JWT token
     jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "100d" }, (err, token) => {
-      if (err || !token) {
-        console.error("Token generation error:", err?.message);
-         res.status(500).json({ Error: "True", Message: "Token could not be generated." });
-         return;
+      if (err) {
+        console.log(err.message);
+        res.json({ Error: "True", Message: "Token is not generated" });
       }
-
-      // Send token in response
-       res.status(200).json({ token });
+       res.json({ token });
     });
-
   } catch (error: unknown) {
-    // Handle unexpected errors
     if (error instanceof Error) {
-       res.status(500).json({ Error: "True", Message: error.message });
+       res.json({ Error: "True", Message: error.message });
     } else {
-        res.status(500).json({ Error: "True", Message: "Something went wrong." });
+       res.json({ Error: "True", Message: "Something went wrong" });
     }
   }
 };
