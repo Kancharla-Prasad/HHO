@@ -6,6 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useMediaQuery } from '@mui/material';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import HandshakeIcon from '@mui/icons-material/Handshake';
 
 function LeftImageCard({donation,isEvenRow}) {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -22,12 +24,20 @@ function LeftImageCard({donation,isEvenRow}) {
                                 <Typography gutterBottom variant="body" component="div">
                                 <span style={{color:"#fa9a34"}}><b>Donated to :</b> </span>   {donation.name}
                                 </Typography>
-                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                <Typography variant="body2" sx={{ color: 'text.secondary',fontFamily:"'Playpen Sans', cursive" }}>
                                     {donation.description}
                                 </Typography>
-                                <Typography gutterBottom variant="body" component="div">
-                                   donated on {donation.date}
-                                </Typography>
+                                <div style={{display:"flex",justifyContent:"space-between",marginTop:"10px"}}>
+                                    <Typography gutterBottom variant="h6" component="div" sx={{padding:"6px 6px 6px 6px" , border:"1px solid #fa9a34",borderRadius:"15px",fontFamily:"'Playpen Sans', cursive"}}>
+                                        <HandshakeIcon sx={{fontSize:isMobile? "20px":"25px",color:"#fa9a34"}}/>
+                                    &nbsp;<span style={{fontSize:"14px"}}>{donation.amt}/-</span>
+                                    </Typography>
+                                    <Typography gutterBottom variant="h6" component="div" sx={{padding:"6px 6px 6px 6px" , border:"1px solid #fa9a34",borderRadius:"15px",fontFamily:"'Playpen Sans', cursive"}}>
+                                        <CalendarMonthIcon sx={{fontSize:isMobile? "20px":"25px",color:"#fa9a34"}}/>
+                                    &nbsp;<span style={{fontSize:"14px"}}>{donation.date}</span>
+                                    </Typography>
+                                </div>
+                               
                                 
                                 
                         </CardContent>

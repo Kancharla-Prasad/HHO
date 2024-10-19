@@ -1,7 +1,7 @@
 import React from 'react'
-import ServiceBanner from './ServiceBanner'
-import Activities from './Activities'
-import Donations from './Donations'
+import ServiceBanner from './components/ServiceBanner'
+import Activities from './components/Activities'
+import Donations from './components/Donations'
 
 function Services() {
   return (

@@ -24,7 +24,8 @@ function Donations() {
       }, []);
     console.log(rows)
     return (
-        <div style={{margin:"50px"}} >
+        <div style={{backgroundColor:"whitesmoke",padding:"10px 0px",margin:"0px 0px 10px 0px"}} >
+        <div style={{margin:"50px",}} >
             <Typography
             variant="h4"
             gutterBottom
@@ -62,6 +63,7 @@ function Donations() {
 
             </Grid>
         </div>
+    </div>
     );
 }
 
