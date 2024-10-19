@@ -35,7 +35,6 @@ function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
-    // alert("hello prasad");
     e.preventDefault();
     if (!email || !password) {
       setAlertMsg("Credentials Required...");
@@ -46,7 +45,10 @@ function LoginPage() {
         const response = await axios.post('http://localhost:8000/api/users/offusers/login', {
           email,
           password,
-        });
+        });    alert("hello prasad");
+
+
+        console.log('Response:', response.data);
         if(response.data) {
           // alert("You are logged in")
           if(response.data.token) {
