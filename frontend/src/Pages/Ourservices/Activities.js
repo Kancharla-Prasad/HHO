@@ -22,24 +22,8 @@ const activities = [
     description: 'Participate in our environmental initiative to keep the surroundings clean and green.',
     image: 'https://res.cloudinary.com/dgye02qt9/image/upload/v1729256419/plasticpicking_s4ylq5.jpg'
   },
-  {
-    title: 'Fundraising Event',
-    description: 'Join us in raising funds for various causes that make a difference in the community.',
-    image: 'https://res.cloudinary.com/dgye02qt9/image/upload/v1729256419/fundraising_image_sejlcp.jpg'
-  },
-  {
-    title: 'Coding Event',
-    description: 'A coding marathon to solve real-world problems and create impactful solutions.',
-    image: 'https://res.cloudinary.com/dgye02qt9/image/upload/v1729256420/codingcontest_rnxoog.jpg'
-  }
 ];
 
-const newObject = {
-    title: 'Coding Event1',
-    description: 'A coding marathon to solve real-world problems and create impactful solutions.',
-    image: 'https://res.cloudinary.com/dgye02qt9/image/upload/v1729256420/codingcontest_rnxoog.jpg'
-  }
-activities.push(newObject);
 
 const Activities = () => {
   return (
@@ -49,11 +33,11 @@ const Activities = () => {
         variant="h4"
         gutterBottom
         sx={{
-            color:"#f06529",
+            color:"#fa9a34",
           fontFamily: '"Anton", sans-serif',
           fontWeight: 300,
           fontSize: { xs: '32px', md: '50px' },
-          textShadow: '0px 4px 10px rgba(0,0,0,0.1)',
+          textShadow: '0px 4px 10px rgba(0,0,0,0.2)',
           letterSpacing: '3px',
           fontStyle: 'normal',
           marginBottom: '30px',
