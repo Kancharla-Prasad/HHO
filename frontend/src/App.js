@@ -18,6 +18,7 @@ import { AppContext } from './Context/Context';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import ProfileContainer from './Pages/Profile/ProfileContainer';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -47,7 +48,7 @@ function App() {
         <Route path='/services' element={<Services />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashbord />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<ProfileContainer />} />
 
 
       </Routes>
