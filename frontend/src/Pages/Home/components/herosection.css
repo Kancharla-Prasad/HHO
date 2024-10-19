@@ -116,20 +116,20 @@
 
 .banner-container {
   display: flex;
+  padding: 50px;
   justify-content: center;
   align-items: center;
-  padding: 50px;
   color: #ffffff;
   position: relative;
   overflow: hidden;
-  height: 450px;
+  height:76vh;
 }
-.banner-container{
+/* .banner-container{
     background-image: url("https://img.freepik.com/premium-vector/handshake-human-help-icon_24877-1243.jpg?ga=GA1.1.979507765.1726655807&semt=ais_hybrid");
     background-repeat: no-repeat;
     background-size: cover;
     
-}
+} */
 .banner-content {
   display: flex;
   justify-content: center;

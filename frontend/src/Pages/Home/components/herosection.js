@@ -162,7 +162,7 @@ export default function HeroSection() {
       style={{ backgroundColor: 'white' }}
       ref={sectionRef}  // Attach reference to the section
     >
-      <div className="row ml-4 mr-4">
+      <div className="row" style={{backgroundColor:"whitesmoke"}}>
         <div className="col-12">
           <h1 className={`about-head text-center mt-5 banner-title`}>
             About <span className='span'>HHO</span>
