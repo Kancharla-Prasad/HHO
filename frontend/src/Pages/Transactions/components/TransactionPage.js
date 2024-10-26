@@ -330,9 +330,9 @@ function TransactionPage() {
         </div>
       </Box>
 
-      <Box sx={{ display: isMobile ? "block" : 'flex', height: 'auto', width: '100%', marginTop: 4, backgroundColor: "whitesmoke", }}>
+      <Box sx={{ display: isMobile ? "block" : 'flex', height: "90vh", width: '100%', marginTop: 4, backgroundColor: "whitesmoke", }}>
         {/* Sidebar Tabs */}
-        <Box sx={{ width: isMobile ? '100%' : '250px', p: 2 }}>
+        <Box sx={{ width: isMobile ? '100%' : '250px',backgroundColor:"white" }}>
           <Tabs
             orientation={isMobile ? 'horizontal' : 'vertical'}
             value={value}

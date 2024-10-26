@@ -24,7 +24,7 @@
 .span {
     margin-bottom: 1rem;
     font-family: "Anton", sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 50px;
     letter-spacing: 3px;
     font-style: normal;
@@ -79,3 +79,13 @@
 .about-mission-img:hover{
     opacity: 0.8;
 }
+@media screen and (max-width:800px)  {
+
+    .about-title{
+      font-size: 45px;
+    }
+    .span{
+      font-size: 40px;
+    }
+    
+  } 

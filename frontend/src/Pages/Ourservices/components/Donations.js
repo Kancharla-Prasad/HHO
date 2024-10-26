@@ -4,7 +4,9 @@ import Grid from '@mui/material/Grid2';
 import { Typography } from '@mui/material';
 import LeftImageCard from './LeftImageCard';
 import RightImageCard from './RightImagecard';
+import { useMediaQuery } from '@mui/material';
 function Donations() {
+    const isMobile = useMediaQuery('(max-width:800px)');
     const [donations,setDonations] = useState([])
     useEffect(() => {
         fetch('/donations.json')
@@ -25,7 +27,7 @@ function Donations() {
     console.log(rows)
     return (
         <div style={{backgroundColor:"whitesmoke",padding:"10px 0px",margin:"0px 0px 10px 0px"}} >
-        <div style={{margin:"50px",}} >
+        <div style={{margin:isMobile?"20px":"50px",}} >
             <Typography
             variant="h4"
             gutterBottom
@@ -43,19 +45,27 @@ function Donations() {
         >
            Our Donations
         </Typography>
+            
             <Grid container spacing={3} justifyContent="center">
             <>
                 {rows.map((row, rowIndex) => (
                 <React.Fragment key={rowIndex}> {/* Ensure a valid key */}
                 {row.map((donation, cardIndex) => {
                     const isEvenRow = rowIndex % 2 === 0;
-
-                    // Return JSX correctly
-                    return cardIndex === 0 ? (
-                    <LeftImageCard key={cardIndex} donation={donation} isEvenRow={isEvenRow} />
-                    ) : (
-                    <RightImageCard key={cardIndex} donation={donation} isEvenRow={isEvenRow} />
-                    );
+                    return (
+                        isMobile ? (
+                        // If `isMobile` is true, check the `cardIndex` and render accordingly
+                        <RightImageCard key={cardIndex} donation={donation} isEvenRow={isEvenRow} />
+                      ) : (
+                        // If `isMobile` is false, always render `RightImageCard`
+                       
+                        cardIndex === 0 ? (
+                            <LeftImageCard key={cardIndex} donation={donation} isEvenRow={isEvenRow} />
+                          ) : (
+                            <RightImageCard key={cardIndex} donation={donation} isEvenRow={isEvenRow} />
+                          )
+                      )
+                    )
                 })}
                 </React.Fragment>
             ))}
@@ -64,6 +74,7 @@ function Donations() {
             </Grid>
         </div>
     </div>
+    
     );
 }
 

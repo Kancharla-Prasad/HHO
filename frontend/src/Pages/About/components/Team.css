@@ -23,12 +23,12 @@
     padding: 30px;
     border-radius: 50%;
     box-shadow: 0 0 22px #3336;
-    transition: .5s;
+    transition: 1s;
 }
 .profile-card:hover{
     border-radius: 10px;
     width: 250px;
-    height: 300px;
+    height: auto;
 
 }
 .profile-card img{
@@ -45,8 +45,8 @@
     
 }
 .profile-card:hover img{
-    border-radius: 10px;
-    height: 120px;
+    width: 90%;
+    height: 150px;
 }
 
 .caption{

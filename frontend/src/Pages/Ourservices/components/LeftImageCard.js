@@ -14,7 +14,7 @@ function LeftImageCard({donation,isEvenRow}) {
     return (
         <>
            <Grid item size={{ xs: 12, md: 6 }}>
-                <Card sx={{display:"flex",height:isMobile?"auto":"280px",fontFamily:"'Playpen Sans', cursive", boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
+                <Card sx={{display:isMobile?"block":"flex",height:isMobile?"auto":"280px",fontFamily:"'Playpen Sans', cursive", boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
                 '&:hover': { boxShadow: '0px 6px 16px orange' },}}>
                     <CardActionArea>
                         <CardContent >

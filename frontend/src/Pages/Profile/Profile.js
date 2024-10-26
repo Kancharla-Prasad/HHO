@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {ThemeProvider,createTheme } from '@mui/material'
 import {
   Avatar,
   Button,
@@ -12,8 +13,63 @@ import {
   TextField,
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock"; // Optional, for button icon
-import PersonIcon from "@mui/icons-material/Person"; // Avatar icon
 
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#fa9a34',
+    },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '& fieldset': {
+            border:"2px solid lightgray",
+          },
+          '&:hover fieldset': {
+            borderColor: '#fa9a34', // Border on hover
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#fa9a34', // Border on focus
+          },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34', // Default border color for Select
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#fa9a34',
+          },
+        },
+        icon: {
+          color: '#fa9a34', // Icon color
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: '#fa9a34',
+            color: 'white',
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#fa9a34',
+            color: 'white',
+          },
+        },
+      },
+    },
+  },
+});
 const Profile = () => {
   const [open, setOpen] = useState(false); // State to control the modal
   const [oldPassword, setOldPassword] = useState("");
@@ -71,26 +127,13 @@ const Profile = () => {
             fontFamily: '"Playpen Sans", cursive',
             fontSize: { xs: "15px", md: "30px" }, // Responsive font size
             marginBottom: { xs: "20px", md: "0px" }, // Add margin bottom for mobile
-          }}
+          }} 
         >
           Welcome {"Core"}
         </Typography>
       </CardContent>
 
-      {/* Avatar with icon moved to the left */}
-      <Avatar
-        sx={{
-          position: "absolute",
-          bottom: { xs: -30, md: -30 }, // Adjusted for bottom spacing
-          left: { xs: 10, md: 20 }, // Position on left for mobile
-          width: { xs: 80, md: 100 }, // Responsive avatar size
-          height: { xs: 80, md: 100 }, // Responsive avatar size
-          border: "3px solid white",
-          backgroundColor: "#fa9a34", // Optional: to make the avatar pop
-        }}
-      >
-        <PersonIcon sx={{ fontSize: { xs: 20, md: 40 } }} /> {/* Responsive icon size */}
-      </Avatar>
+      
 
       {/* Change Password Button positioned at the bottom right */}
       <Button
@@ -124,15 +167,15 @@ const Profile = () => {
         onClose={handleClose}
         sx={{
           "& .MuiDialog-paper": {
-            backgroundColor: "#fa9a34", // Light orange background for the dialog
-            color: "black", // Black text color
+            backgroundColor: "#ffffff", // Light orange background for the dialog
+            color: "#fa9a34", // Black text color
           },
         }}
       >
-        <DialogTitle>Change Password</DialogTitle>
+        <DialogTitle><b>Change Password</b></DialogTitle>
         <DialogContent>
+        <ThemeProvider theme={customTheme}>
           <TextField
-            autoFocus
             margin="dense"
             label="Old Password"
             type="password"
@@ -141,8 +184,9 @@ const Profile = () => {
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
             InputProps={{
-              sx: { color: "black" }, // Set text color to black
+              sx: { color: "#fa9a34" }, // Set text color to black
             }}
+            
           />
           <TextField
             margin="dense"
@@ -153,16 +197,19 @@ const Profile = () => {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             InputProps={{
-              sx: { color: "black" }, // Set text color to black
+              sx: { color: "#fa9a34" }, // Set text color to black
             }}
+            
+         
           />
+           </ThemeProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+          <Button onClick={handleClose} color="#fa9a34">
+            <b>Cancel</b>
           </Button>
-          <Button onClick={handleUpdatePassword} color="primary">
-            Update Password
+          <Button onClick={handleUpdatePassword} color="#fa9a34">
+            <b>Update Password</b>
           </Button>
         </DialogActions>
       </Dialog>

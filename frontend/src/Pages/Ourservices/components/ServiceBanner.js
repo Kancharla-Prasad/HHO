@@ -64,7 +64,7 @@ const ServiceBanner = () => {
     // </Box>
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh", backgroundColor: "white" }}>
     <div>
-      <h1 className='about-title text-center'><span className='span'>Our </span> Services</h1>
+      <h1 className='about-title text-center'>Our <span className='span'> Services</span> </h1>
       <figure className="text-center">
         <blockquote className="blockquote">
         <Typography

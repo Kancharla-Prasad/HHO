@@ -13,6 +13,7 @@ function Team() {
             .catch(error => console.error('Error fetching team data:', error));
     }, []);
     console.log(teamData)
+
     const teamdetails = (teamData) => {
         if (teamData) {
             return teamData.map((item, index) => {
@@ -32,7 +33,7 @@ function Team() {
                     //         </div>
                     //     </div>
                     //</div>
-                    <div style={{ color: "darkorange" }} key={index}>
+                    <div style={{ color: "darkorange",height:"60vh" }} key={index}>
                         <h5 style={{ marginBottom: "15px" }} className='role mt-5 about-content'>{item.role}</h5>
                         <div className='profile-card'>
                             <div className='img'>
