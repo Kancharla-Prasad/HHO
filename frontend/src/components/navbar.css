@@ -50,6 +50,7 @@
 
 *{
     font-family: serif;
+    margin: 0px;
 }
 .bg-orange {
     background-color: rgb(255, 177, 75) !important;

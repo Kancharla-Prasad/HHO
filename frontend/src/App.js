@@ -19,6 +19,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import ProfileContainer from './Pages/Profile/ProfileContainer';
+import Chaitra from './Pages/Event/components/Chaitra';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -49,7 +50,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashbord />} />
         <Route path='/profile' element={<ProfileContainer />} />
-
+        <Route path='/chaitra' element={<Chaitra />} ></Route>
 
       </Routes>
     <Footer />

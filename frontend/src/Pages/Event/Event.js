@@ -1,12 +1,14 @@
-import React from 'react'
-import Slider from './components/slider'
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function Event() {
+import Chaitra from './components/Chaitra';
+import Slider from './components/Slider';
+
+function App() {
   return (
-    <div>
-      <Slider />
-    </div>
-  )
+    <Slider />
+  );
 }
 
-export default Event
+export default App;
